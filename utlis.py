@@ -4,7 +4,7 @@ import json
 import xlsxwriter
 
 
-def calcfib(n: int) -> int:
+def fibonacci_calc(n: int) -> int:
     if n == 0:
         return 0
     b, a = 0, 1
@@ -14,6 +14,8 @@ def calcfib(n: int) -> int:
 
 
 def is_palindrome(word):
+    word = ''.join(char for char in word if word.isalnum())
+    word = word.lower()
     return word == word[::-1]
 
 

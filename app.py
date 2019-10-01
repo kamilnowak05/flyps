@@ -1,6 +1,6 @@
 import os
-from utlis import calcfib, is_palindrome, is_valid_card, google_api_request, \
-    create_xlsx_file
+from utlis import fibonacci_calc, is_palindrome, is_valid_card, \
+    google_api_request, create_xlsx_file
 from flask import Flask, render_template, request, send_file
 
 
@@ -20,13 +20,12 @@ def index():
                     'index.html',
                     result_fib='It can\'t be negative number.'
                 )
-            result = calcfib(fib)
+            result = fibonacci_calc(fib)
             return render_template('index.html', result_fib=str(result))
 
         elif 'palindrome' in request.form:
             pal = request.form['palindrome']
-            pal = ''.join(char for char in pal if char.isalnum())
-            result = is_palindrome(pal.lower())
+            result = is_palindrome(pal)
             if result is False:
                 result = 'False'
             return render_template('index.html', result_palin=result)
