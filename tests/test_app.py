@@ -17,26 +17,28 @@ def test_index_get_ok(test_client):
 
 
 def test_fibonacci_calc_post_ok(test_client):
-    data = {
+    payload = {
         'fibonacci': 2
     }
-    response = test_client.post('/', data=data)
+    response = test_client.post('/', data=payload)
     assert response.status_code == 200
 
 
 def test_is_palindrome_post_ok(test_client):
-    data = {
+    payload = {
         'palindrome': 'Zagwiżdż i w gaz'
     }
-    response = test_client.post('/', data=data)
+    response = test_client.post('/', data=payload)
     assert response.status_code == 200
+    g = test_client.get('/')
+    assert b"This is palindrome:" in g.data
 
 
 def test_is_valid_card_post_ok(test_client):
-    data = {
-        'card': '54'
+    payload = {
+        'card': '4875-2134-9491-5582'
     }
-    response = test_client.post('/', data=data)
+    response = test_client.post('/', data=payload)
     assert response.status_code == 200
 
 

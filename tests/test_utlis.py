@@ -9,6 +9,11 @@ def test_fibonacci_calc_ok():
     assert fibonacci_calc(5) == 5
 
 
+def test_fibonacci_calc_fail():
+    with pytest.raises(TypeError):
+        fibonacci_calc('test')
+
+
 def test_is_palindrome_ok():
     assert is_palindrome('1Bo ob1') is True
     assert is_palindrome('1Doe1') is False
