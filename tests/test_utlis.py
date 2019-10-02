@@ -28,6 +28,11 @@ def test_is_valid_card_ok():
     assert is_valid_card('4875:2134:9491:5582') is False
 
 
+def test_is_valid_card_fail():
+    with pytest.raises(TypeError):
+        is_valid_card()('test')
+
+
 def test_google_api_request_ok():
     data = 'Hobbit'
     assert data in google_api_request(data)[0]['title']
