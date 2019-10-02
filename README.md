@@ -54,3 +54,5 @@ $ pytest
 ## Default urls:
 - localhost:5000/
 - localhost:5000/books
+
+## More in video
