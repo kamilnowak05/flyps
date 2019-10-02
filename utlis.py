@@ -14,7 +14,7 @@ def fibonacci_calc(n: int) -> int:
 
 
 def is_palindrome(word):
-    word = ''.join(char for char in word if word.isalnum())
+    word = ''.join(word.split())
     word = word.lower()
     return word == word[::-1]
 
