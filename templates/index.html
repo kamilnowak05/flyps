@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <div class="container" style="margin-inline: 100%">
+    <div class="container">
         <div class="header py-2 mx-auto bg-primary">
             <h3 class="text-white px-4">Little bit of skills for Flyps</h3>
         </div>
@@ -18,7 +18,7 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/hH8BlnuB-tg" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
-        <div class="row marketing">
+        <div class="row">
             <div class="col-lg-6 border" >
                 <form action = "/" method = "POST" class="border-bottom p-3">
                     <h4>Fibonacci</h4>
@@ -38,6 +38,16 @@
                 </form>
                 {% if result_palin %}
                     <p class="text-success">This is palindrome: {{ result_palin }}</p>
+                {% endif %}
+
+                <form action = "/" method = "POST" class="border-bottom p-3">
+                    <h4>Palindrome with marks</h4>
+                    <p>Palindrom – a word, number, phrase, or other sequence of characters which reads the same backward as forward, such as ‘’taco cat’’ or madam or racecar or the number 10801.</p>
+                    <input class="form-control" type="text" name="palindrome_with_marks" placeholder="Type the palindrome" required>
+                    <input class="btn btn-primary my-2" type="submit" value="Submit">
+                </form>
+                {% if result_palin_marks %}
+                    <p class="text-success">This is palindrome: {{ result_palin_marks }}</p>
                 {% endif %}
 
             </div>

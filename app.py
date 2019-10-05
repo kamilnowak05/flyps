@@ -1,6 +1,6 @@
 import os
 from utlis import fibonacci_calc, is_palindrome, is_valid_card, \
-    google_api_request, create_xlsx_file
+    google_api_request, create_xlsx_file, is_palindrome_with_marks
 from flask import Flask, render_template, request, send_file
 
 
@@ -29,6 +29,13 @@ def index():
             if result is False:
                 result = 'False'
             return render_template('index.html', result_palin=result)
+
+        elif 'palindrome_with_marks' in request.form:
+            pal = request.form['palindrome_with_marks']
+            result = is_palindrome_with_marks(pal)
+            if result is False:
+                result = 'False'
+            return render_template('index.html', result_palin_marks=result)
 
         elif 'card' in request.form:
             numb = request.form['card']

@@ -4,6 +4,13 @@ import json
 import xlsxwriter
 
 
+def new_string(word):
+
+    new_sting = new_string.lower()
+    print(new_string)
+    return new_string
+
+
 def fibonacci_calc(n: int) -> int:
     if n == 0:
         return 0
@@ -13,10 +20,23 @@ def fibonacci_calc(n: int) -> int:
     return a
 
 
-def is_palindrome(word):
-    word = ''.join(word.split())
-    word = word.lower()
+def is_palindrome(word: str) -> str:
+    raw_s1 = "%r" % word
+    a = []
+    for i in raw_s1:
+        a.append(i.lower())
+    word = "".join(c for c in a if c.isalnum())
     return word == word[::-1]
+
+
+def is_palindrome_with_marks(word: str) -> str:
+    raw_s1 = "%r" % word
+    raw_s1 = raw_s1.replace('x0', '')
+    raw_s1 = raw_s1.replace(' ', '')
+    a = []
+    for i in raw_s1:
+        a.append(i.lower())
+    return a == a[::-1]
 
 
 def is_valid_card(numb: str) -> str:
@@ -38,7 +58,7 @@ def is_valid_card(numb: str) -> str:
 def google_api_request(search):
     response = requests.get(
         f"https://www.googleapis.com/books/v1/volumes?q={search}+intitle:{search}"
-        )
+    )
     resp = json.loads(response.text)
     books = []
     book = {}
