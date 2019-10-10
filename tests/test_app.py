@@ -11,7 +11,7 @@ def test_client():
 def test_index_get_ok(test_client):
     response = test_client.get('/')
     assert response.status_code == 200
-    assert b"Little bit of skills for the Flyps" in response.data
+    assert b"Little bit of skills for Flyps" in response.data
     assert b"Fibonacci" in response.data
     assert b"This is palindrome:" not in response.data
 

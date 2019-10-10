@@ -1,8 +1,8 @@
 import pytest
 import os.path
 
-from utlis import fibonacci_calc, is_palindrome, is_valid_card, \
-    create_xlsx_file, google_api_request
+from utlis import fibonacci_calc, is_palindrome, is_palindrome_with_marks, \
+    is_valid_card, create_xlsx_file, google_api_request
 
 
 def test_fibonacci_calc_ok():
@@ -17,6 +17,17 @@ def test_fibonacci_calc_fail():
 def test_is_palindrome_ok():
     assert is_palindrome('1Bo ob1') is True
     assert is_palindrome('1Doe1') is False
+    assert is_palindrome('1.n\t.n1') is True
+    assert is_palindrome('1\n\t\n1') is True
+
+
+def test_is_palindrome_with_marks_ok():
+    assert is_palindrome_with_marks('1Bo ob1') is True
+    assert is_palindrome_with_marks('1Doe1') is False
+    assert is_palindrome_with_marks('1n\t\n1') is True
+    assert is_palindrome_with_marks('1\n\t\n1') is False
+    assert is_palindrome_with_marks('1n.t.n1') is True
+    assert is_palindrome_with_marks('1.n.t.n1') is False
 
 
 def test_is_valid_card_ok():
