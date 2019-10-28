@@ -1,4 +1,5 @@
-import os
+import json
+
 from utlis import fibonacci_calc, is_palindrome, is_valid_card, \
     google_api_request, create_xlsx_file, is_palindrome_with_marks
 from flask import Flask, render_template, request, send_file
@@ -56,6 +57,13 @@ def books():
         response = google_api_request(search)
         create_xlsx_file(response)
         return send_file('books.xlsx', as_attachment=True)
+
+
+@app.route('/books2/<search>', methods=['GET'])
+def books2(search):
+    if request.method == 'GET' and request.content_type == 'application/json':
+        response = google_api_request(search)
+        return json.dumps(response)
 
 
 if __name__ == '__main__':

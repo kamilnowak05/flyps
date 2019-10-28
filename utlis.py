@@ -4,13 +4,6 @@ import json
 import xlsxwriter
 
 
-def new_string(word):
-
-    new_sting = new_string.lower()
-    print(new_string)
-    return new_string
-
-
 def fibonacci_calc(n: int) -> int:
     if n == 0:
         return 0
@@ -26,7 +19,7 @@ def is_palindrome(word: str) -> str:
     for i in raw_s1:
         a.append(i.lower())
     word = "".join(c for c in a if c.isalnum())
-    return word == word[::-1]
+    return str(word == word[::-1])
 
 
 def is_palindrome_with_marks(word: str) -> str:
@@ -36,7 +29,7 @@ def is_palindrome_with_marks(word: str) -> str:
     a = []
     for i in raw_s1:
         a.append(i.lower())
-    return a == a[::-1]
+    return str(a == a[::-1])
 
 
 def is_valid_card(numb: str) -> str:
@@ -64,37 +57,17 @@ def google_api_request(search):
     book = {}
     if 'items' in resp:
         for i in resp['items']:
-            published_date = 'N/A'
-            language = 'N/A'
-            author = 'N/A'
-            price = 'N/A'
-            currency = 'N/A'
-            sale_info = 'N/A'
-            title = i['volumeInfo']['title']
-
-            if 'language' in i['volumeInfo']:
-                language = i['volumeInfo']['language']
-
-            if 'authors' in i['volumeInfo']:
-                author = i['volumeInfo']['authors'][0]
-
-            if 'publishedDate' in i['volumeInfo']:
-                published_date = i['volumeInfo']['publishedDate']
-
+            book['title'] = i['volumeInfo'].get('title')
+            book['author'] = i['volumeInfo'].get('authors', 'N/A')
+            book['language'] = i['volumeInfo'].get('language', 'N/A')
+            book['published_date'] = i['volumeInfo'].get('publishedDate', 'N/A')
+            book['sale_info'] = i['saleInfo'].get('saleability', 'N/A')
             if 'listPrice' in i['saleInfo']:
-                price = i['saleInfo']['listPrice']['amount']
-                currency = i['saleInfo']['listPrice']['currencyCode']
-
-            if 'saleability' in i['saleInfo']:
-                sale_info = i['saleInfo']['saleability']
-
-            book['title'] = title
-            book['published_date'] = published_date
-            book['language'] = language
-            book['author'] = author
-            book['price'] = str(price)
-            book['currency'] = currency
-            book['sale_info'] = sale_info
+                book['price'] = str(i['saleInfo']['listPrice'].get('amount', 'N/A'))
+                book['currency'] = i['saleInfo']['listPrice'].get('currencyCode', 'N/A')
+            else:
+                book['price'] = 'N/A'
+                book['currency'] = 'N/A'
             books.append(dict(book))
     return books
 
@@ -135,7 +108,7 @@ def create_xlsx_file(data):
     for i in data:
         worksheet.write_string(row, col, f'{no}.')
         worksheet.write_string(row, col + 1, i['title'], cell_format)
-        worksheet.write_string(row, col + 2, i['author'], cell_format)
+        worksheet.write_string(row, col + 2, i['author'][0], cell_format)
         worksheet.write_string(row, col + 3, i['published_date'])
         worksheet.write_string(row, col + 4, i['language'])
         worksheet.write_string(row, col + 5, i['price'])
